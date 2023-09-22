@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\DasboardController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Guest\MainController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\TechnologyController;
 
 Route::get('/',[MainController::class, 'index'])->name('guest.welcome');
 Route::get('/projects/{id}',[MainController::class, 'show'])->name('guest.show');
@@ -32,6 +33,8 @@ Route::middleware(['auth', 'verified'])
     Route::resource('projects',ProjectController::class);
 
     Route::resource('types',TypeController::class);
+
+    Route::resource('technologies',TechnologyController::class);
 });
 
 require __DIR__.'/auth.php';

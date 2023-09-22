@@ -27,6 +27,9 @@
                             <a href="{{ route('admin.types.index') }}">Types</a>
                         </li>
                         <li>
+                            <a href="{{ route('admin.technologies.index') }}">Technologies</a>
+                        </li>
+                        <li>
                             <div>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf

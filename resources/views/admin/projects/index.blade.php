@@ -19,7 +19,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
-                <th scope="col">Languages</th>
+                <th scope="col">Technology</th>
                 <th scope="col">Type</th>
                 <th scope="col">Actions</th>
               </tr>
@@ -29,7 +29,15 @@
                     <tr>
                         <th scope="row">{{ $project->id }}</th>
                         <td>{{ $project->title }}</td>
-                        <td>{{ $project->languages }}</td>
+                        <td>
+                            @forelse ($project->technologies as $technology)
+                                <span class="badge rounded-pill text-bg-primary">
+                                    {{ $technology->title }}
+                                </span>
+                            @empty
+                                -
+                            @endforelse
+                        </td>
                         <td>
                             <a href="{{ route('admin.types.index') }}">
                                 {{ $project->type->title }}

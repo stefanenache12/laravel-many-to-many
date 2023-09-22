@@ -42,16 +42,6 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="languages" class="form-label @error('languages') is-invalid @enderror">Languages</label>
-                    @error('languages')
-                        <div class="alert alert-danger my-2">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                    <input type="text" maxlength="64" class="form-control" id="languages" name="languages" value="{{ old('languages') }}" placeholder="Php,JavaScript..." >
-                </div>
-
-                <div class="mb-3">
                     <label for="type_id" class="form-label">Type</label>
                     <select class="form-select" id="type_id" name="type_id">
                         <option value="">Select a type...</option>
@@ -69,6 +59,19 @@
                     </select>
                 </div>
 
+                <div class="mb-2">
+                    Technologies
+                </div>
+
+                @foreach ($technologies as $technology)
+                    <div class="form-check mb-4 d-inline-block me-2">
+                        <input class="form-check-input border-2" type="checkbox" name="technologies[]" value="{{ $technology->id }}" id="technology-{{ $technology->id }}">
+                        <label class="form-check-label" for="technology-{{ $technology->id }}">
+                            {{ $technology->title }}
+                        </label>
+                    </div>
+                @endforeach
+                
                 <button type="submit" class="m-auto col-12 btn btn-success">
                     ADD PROJECT
                 </button>

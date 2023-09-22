@@ -7,6 +7,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 
 use App\Models\Type;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -25,7 +26,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create',compact('types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create',compact('types','technologies'));
     }
 
     /**
@@ -40,10 +42,16 @@ class ProjectController extends Controller
         $project -> title = $formData['title'];
         $project -> description = $formData['description'];
         $project -> img_link = $formData['img_link'];
-        $project -> languages = $formData['languages'];
         $project -> type_id = $formData['type_id'];
 
         $project->save();
+
+        if(isset($formData['technologies'])){
+            foreach ($formData['technologies'] as $technologyId) {
+
+                $project->technologies()->attach($technologyId);
+            }
+        }
 
         return redirect()->route('admin.projects.index');
     }
@@ -65,8 +73,8 @@ class ProjectController extends Controller
         
         $project = Project::findOrFail($id);
         $types = Type::all();
-
-        return view('admin.projects.edit',compact('project','types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit',compact('project','types','technologies'));
     }
 
     /**
@@ -79,10 +87,16 @@ class ProjectController extends Controller
         $project -> title = $formData['title'];
         $project -> description = $formData['description'];
         $project -> img_link = $formData['img_link'];
-        $project -> languages = $formData['languages'];
         $project -> type_id = $formData['type_id'];
 
         $project->save();
+
+        if (isset($formData['technologies'])) {
+            $project->technologies()->sync($formData['technologies']);
+        }
+        else {
+            $project->technologies()->detach();
+        }
 
         return redirect()->route('admin.projects.index');
     }

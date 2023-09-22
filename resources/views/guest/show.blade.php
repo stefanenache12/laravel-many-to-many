@@ -3,7 +3,7 @@
 @section('page-title', 'Welcome')
 
 @section('main-content')
-    <div class="container mt-5">
+    <div class="container mt-5" style="margin-bottom:80px">
         <h1 class="text-center mb-5">
             {{ $project->title }}  
         </h1>
@@ -16,10 +16,17 @@
                 <h5 class="mb-4">
                      {{ $project->description }}
                 </h5>
-                <h5 class="mb-4">
-                    Languages: {{ $project->languages }}
+                <h5 class="mb-1">
+                    Technologies
                 </h5>
-                <h6>
+                @forelse ($project->technologies as $technology)
+                                <span class="badge rounded-pill text-bg-primary">
+                                    {{ $technology->title }}
+                                </span>
+                            @empty
+                                -
+                            @endforelse
+                <h6 class="mt-3">
                     Type: {{ $project->type->title }}
                 </h6>
             </div>

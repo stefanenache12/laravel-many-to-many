@@ -43,16 +43,6 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="languages" class="form-label @error('languages') is-invalid @enderror">Languages</label>
-                    @error('languages')
-                        <div class="alert alert-danger my-2">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                    <input type="text" maxlength="64" class="form-control" id="languages" name="languages" value="{{ old('languages',$project->languages) }}" placeholder="Php,JavaScript..." >
-                </div>
-
-                <div class="mb-3">
                     <label for="type_id" class="form-label">Type</label>
                     <select class="form-select" id="type_id" name="type_id">
                         <option value="">Select a type</option>
@@ -68,6 +58,41 @@
                             </option>
                         @endforeach
                     </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label d-block">Technologies</label>
+                    @foreach ($technologies as $technology)
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="technologies[]"
+                                id="technology-{{ $technology->id }}"
+                                value="{{ $technology->id }}"
+                                @if (
+                                    $errors->any()
+                                )
+
+                                    @if (
+                                        in_array(
+                                            $technology->id,
+                                            old('technologies', [])
+                                        )
+                                    )
+                                        checked
+                                    @endif
+                                 @elseif (
+                                    $project->technologies->contains($technology)
+                                )
+                                    checked 
+                                @endif
+                                >
+                            <label class="form-check-label" for="technology-{{ $technology->id }}">
+                                {{ $technology->title }}
+                            </label>
+                        </div>
+                    @endforeach
                 </div>
 
                 <button type="submit" class="m-auto col-12 btn btn-success">

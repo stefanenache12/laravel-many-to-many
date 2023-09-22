@@ -31,25 +31,6 @@
                                 @endforeach
                             </ul>
                         </td>
-                        {{-- <td>
-                            <a href="{{ route('admin.types.edit',['type' => $type->id]) }}">
-                                <button class="btn btn-outline-warning">
-                                    UPDATE
-                                </button>
-                            </a>
-                            <form
-                                action="{{ route('admin.types.destroy', ['type' => $type->id]) }}"
-                                class="d-inline-block"
-                                method="POST"
-                                onsubmit="return confirm('Are you sure you want to Delete this type?');">
-                                @csrf
-                                @method('DELETE')
-                                
-                                <button type="submit" class="btn btn-outline-danger">
-                                    DELETE
-                                </button>
-                            </form>
-                        </td> --}}
                     </tr>
               @endforeach
             </tbody>
