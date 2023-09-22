@@ -3,7 +3,7 @@
 @section('page-title', 'Login')
 
 @section('main-content')
-    <div class="container mt-5">
+    <div class="container mt-5" style="margin-bottom:133.5px;">
         <form class="w-25 m-auto border rounded shadow p-3" method="POST" action="{{ route('login') }}">
             @csrf
     

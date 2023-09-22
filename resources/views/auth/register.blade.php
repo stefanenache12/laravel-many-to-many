@@ -3,7 +3,7 @@
 @section('page-title', 'Register')
 
 @section('main-content')
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
         <form class="w-25 m-auto border rounded shadow p-3" method="POST" action="{{ route('register') }}">
             @csrf
     
